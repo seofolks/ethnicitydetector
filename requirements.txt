@@ -1,9 +1,7 @@
 streamlit==1.52.1
 deepface==0.0.96
-# TensorFlow 2.20.0 has Python 3.13 wheels (Cloud default).
 tensorflow==2.20.0
 tf-keras==2.20.0
-# Headless OpenCV avoids libGL issues on Streamlit Cloud.
-opencv-python-headless==4.10.0.84
+opencv-python-headless==4.9.0.80
 Pillow>=10.4.0
-# Numpy version will be determined by TensorFlow dependencies (likely >=2.1)
+numpy==2.2.1
