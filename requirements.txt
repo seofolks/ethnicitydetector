@@ -6,7 +6,5 @@ tf-keras==2.20.0
 # Headless OpenCV avoids libGL issues on Streamlit Cloud.
 opencv-python-headless==4.10.0.84
 Pillow>=10.4.0
-# Numpy <=2.1 is required by TF 2.20. Pin within compatible range.
-numpy==2.2.1
-
-
+# Pin numpy < 2 to avoid binary incompatibility with compiled wheels
+numpy<2
