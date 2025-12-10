@@ -71,8 +71,8 @@ def main() -> None:
                     return
 
             st.success("Analysis complete.")
-            st.write(f"Emotion: **{result.get('dominant_emotion', 'n/a')}**")
-            st.write(f"Ethnicity: **{result.get('dominant_race', 'n/a')}**")
+            st.write(f"Dominant emotion: **{result.get('dominant_emotion', 'n/a')}**")
+            st.write(f"Dominant ethnicity: **{result.get('dominant_race', 'n/a')}**")
 
             _render_scores("Emotion scores", result.get("emotion"))
             _render_scores("Ethnicity scores", result.get("race"))
