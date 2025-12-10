@@ -3,12 +3,11 @@ import streamlit as st
 from deepface import DeepFace
 from PIL import Image
 
-
 st.set_page_config(page_title="Ethnicity & Emotion Detector", page_icon="📷")
 
 
 def _pil_to_bgr(image: Image.Image) -> np.ndarray:
-    """Convert a PIL image to OpenCV BGR format using NumPy."""
+    """Convert a PIL image to BGR format using NumPy."""
     rgb = np.array(image.convert("RGB"))
     return rgb[:, :, ::-1]  # Reverse channels for BGR
 
