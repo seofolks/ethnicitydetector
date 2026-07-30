@@ -1,0 +1,9 @@
+streamlit==1.52.1
+deepface==0.0.96
+tensorflow==2.20.0
+tf-keras==2.20.0
+# Headless OpenCV avoids libGL issues on Streamlit Cloud.
+# 4.10+ has reliable wheels; 4.9 often breaks on Cloud's Python 3.13 default.
+opencv-python-headless==4.10.0.84
+Pillow>=10.4.0
+numpy==2.2.1
