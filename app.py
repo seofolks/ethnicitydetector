@@ -2,30 +2,10 @@ import numpy as np
 import streamlit as st
 from PIL import Image
 
+from analyzer import analyze_image, pil_to_bgr
+
 
 st.set_page_config(page_title="Ethnicity & Emotion Detector", page_icon="📷")
-
-
-def _pil_to_bgr(image: Image.Image) -> np.ndarray:
-    """Convert a PIL image to BGR format using NumPy."""
-    rgb = np.array(image.convert("RGB"))
-    return rgb[:, :, ::-1]  # Reverse channels for BGR
-
-
-def _analyze_image(image_bgr: np.ndarray) -> dict:
-    """Run DeepFace analysis for emotion and ethnicity."""
-    # Import lazily so the UI can load even if native deps fail at startup.
-    from deepface import DeepFace
-
-    result = DeepFace.analyze(
-        img_path=image_bgr,
-        actions=["emotion", "race"],
-        enforce_detection=False,
-    )
-    # DeepFace may return a list when multiple faces are found.
-    if isinstance(result, list):
-        result = result[0]
-    return result
 
 
 def _render_scores(title: str, scores: dict | None) -> None:
@@ -34,7 +14,7 @@ def _render_scores(title: str, scores: dict | None) -> None:
     sorted_items = sorted(scores.items(), key=lambda item: item[1], reverse=True)
     labels, values = zip(*sorted_items)
     st.markdown(f"**{title}**")
-    st.table({"label": labels, "score": [round(v, 4) for v in values]})
+    st.table({"label": labels, "score": [round(float(v), 4) for v in values]})
 
 
 def main() -> None:
@@ -65,7 +45,7 @@ def main() -> None:
         if st.button("Analyze"):
             with st.spinner("Running DeepFace... this can take a moment on first run."):
                 try:
-                    result = _analyze_image(_pil_to_bgr(image))
+                    result = analyze_image(pil_to_bgr(image))
                 except Exception as exc:  # pragma: no cover - surface errors to UI
                     st.error(f"Analysis failed: {exc}")
                     return
