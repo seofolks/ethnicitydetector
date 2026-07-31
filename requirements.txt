@@ -2,8 +2,8 @@ streamlit==1.52.1
 deepface==0.0.96
 tensorflow==2.20.0
 tf-keras==2.20.0
-# DeepFace depends on opencv-python (needs libGL). Keep headless too;
-# packages.txt provides libgl1 so cv2 can import on Streamlit Cloud.
+# Use headless OpenCV only. Do NOT install opencv-python (esp. 5.x) — it breaks
+# CascadeClassifier used by DeepFace's default detector.
 opencv-python-headless==4.10.0.84
 Pillow>=10.4.0
 numpy==2.2.1
